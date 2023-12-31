@@ -1,0 +1,133 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* Wrapper */
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  background-color: #e5e5e5;
+}
+
+/* Header */
+.header {
+  flex: 0 1 60px;
+}
+.header__title {
+  text-align: center;
+}
+
+/* Main */
+
+.main {
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* Board */
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+
+  background-color: #000;
+}
+.board__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5e5;
+  position: relative;
+
+  transition: background-color .2s ease;
+}
+.board__item.painted {
+  background: linear-gradient(120deg, #444, #777);
+}
+.board__item.zero::before  {
+  content: '';  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border: 2px solid rgb(255, 41, 87);
+  border-radius: 50%;
+}
+.board__item.cross::before, .board__item.cross::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(61, 107, 255);
+}
+.board__item.cross::before {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+.board__item.cross::after {
+  bottom: 50%;
+  left: 0;
+  transform: translateY(-50%) rotate(-45deg);
+}
+.board__item:not(.disabled):hover {
+  background-color: #ccc;
+}
+
+/* Score */
+.score__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  margin-top: 30px;
+}
+.score__title {
+  text-align: center;
+}
+.score__button {
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  background: #444;
+  color: #fff;
+  margin: 0 auto;
+  border: none;
+  text-align: center;
+  margin-top: 20px;
+  transition: background-color .2s ease;
+}
+.score__button:hover {
+  background-color: #333;
+}
+.score {
+  display: flex;
+  gap: 50px;
+  margin: 0 auto;
+  align-items: center;
+}
+.score span {
+  font-size: 1.4em;
+  font-weight: 600;
+  transition: font-size .2s ease-in-out;
+}
+.score span.painted {
+  font-size: 1.8em;
+}
